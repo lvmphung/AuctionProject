@@ -89,7 +89,7 @@ def bid():
 @app.route('/showbid', methods=["GET", "POST"])
 def showbid():
     if request.form:
-        bids = Bid.query.filter_by(item_id=int(request.form.get("item_id"))).order_by("price desc")
+        bids = Bid.query.filter_by(item_id=int(request.form.get("item_id"))).order_by("price desc").limit(1)
         return render_template('showbid.html', bids=bids)
     else:
         return render_template('showbid.html')

@@ -81,7 +81,7 @@ ga('create', 'UA-30027142-1', 'w3layouts.com');
 				</form>
 			</div>
 		</div>
-        <h1>List bid for item</h1>
+        <h1>Get highest bid for item</h1>
         <div class="main-agilerow">
             {% for bid in bids %}
               <p>UserId: {{bid.bid_by}} - Price: {{ bid.price }} -Created At: {{ bid.created_at }}</p>
