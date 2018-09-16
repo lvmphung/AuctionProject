@@ -13,7 +13,7 @@ class Item(db.Model):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     name = db.Column(db.String(80), unique=True, nullable=False)
     description = db.Column(db.String(500), nullable=False)
-    start_time = db.Column(db.DateTime)
+    start_time = db.Column(db.DateTime, nullable=True)
     created_at = db.Column(db.DateTime, nullable=False)
     created_by = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
 
@@ -60,8 +60,11 @@ def signup():
 @app.route('/items', methods=["GET", "POST"])
 def item():
     if request.form:
+        starttime = None
+        if request.form.get("start_time") != '':
+            starttime = request.form.get("start_time")
         item = Item(name=request.form.get("name"), description=request.form.get("description"),
-                    created_at=datetime.now(), start_time=request.form.get("start_time"),
+                    created_at=datetime.now(), start_time=starttime,
                     created_by=request.form.get("created_by"),
                     )
         db.session.add(item)
